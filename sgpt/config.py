@@ -57,6 +57,10 @@ class Config(dict):  # type: ignore
             if not defaults.get("OPENAI_API_KEY") and not os.getenv("OPENAI_API_KEY"):
                 __api_key = getpass(prompt="Please enter your OpenAI API key: ")
                 defaults["OPENAI_API_KEY"] = __api_key
+            # Don't write Gemini API key to config file if it is in the environment.
+            if not defaults.get("GEMINI_API_KEY") and not os.getenv("GEMINI_API_KEY"):
+                __api_key = getpass(prompt="Please enter your Gemini API key: ")
+                defaults["GEMINI_API_KEY"] = __api_key
             super().__init__(**defaults)
             self._write()
 
